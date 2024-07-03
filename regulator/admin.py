@@ -32,12 +32,12 @@ class TechnologyAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 class RegulationAdmin(admin.ModelAdmin):
-    list_display = ('title', 'regulator', 'industry_sector', 'regulation_type', 'technology', 'compliance_guidelines')
+    list_display = ('title', 'regulator', 'industry_sector', 'regulation_type', 'technology', 'regulatorydetails')
     list_filter = ('regulator', 'industry_sector', 'regulation_type', 'technology')
     search_fields = ('title', 'description')
     fieldsets = (
         (None, {
-            'fields': ('title', 'description', 'regulator', 'industry_sector', 'regulation_type', 'technology', 'compliance_guidelines')
+            'fields': ('title', 'description', 'regulator', 'industry_sector', 'regulation_type', 'technology', 'regulatorydetails')
         }),
     )
 

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ regulation.title }}</title>
+</head>
+<body>
+    <h1>{{ regulation.title }}</h1>
+    <p>{{ regulation.description }}</p>
+    <ul>
+        <li><strong>Regulator:</strong> {{ regulation.regulator.name }}</li>
+        <li><strong>Industry Sector:</strong> {{ regulation.industry_sector.name }}</li>
+        <li><strong>Regulation Type:</strong> {{ regulation.regulation_type.name }}</li>
+        <li><strong>Technology:</strong> {{ regulation.technology.name }}</li>
+        <li><strong>Regulation Details:</strong> {{ regulation.regulatorydetails }}</li>
+    </ul>
+</body>
+</html>
