@@ -5,14 +5,14 @@
 {% block content %}
 <div class="row">
     <div class="col-md-12">
-        <h1 class="my-4">{{ regulation.title }}</h1>
-        <p class="lead">{{ regulation.description }}</p>
-        <ul class="list-group">
-            <li class="list-group-item"><strong>Regulator:</strong> {{ regulation.regulator.name }}</li>
-            <li class="list-group-item"><strong>Industry Sector:</strong> {{ regulation.industry_sector.name }}</li>
-            <li class="list-group-item"><strong>Regulation Type:</strong> {{ regulation.regulation_type.name }}</li>
-            <li class="list-group-item"><strong>Technology:</strong> {{ regulation.technology.name }}</li>
-            <li class="list-group-item"><strong>Regulatory Details:</strong> {{ regulation.regulatorydetails }}</li>
+        <h1 class="my-4 text-primary">{{ regulation.title }}</h1>
+        <p class="lead text-secondary">{{ regulation.description }}</p>
+        <ul class="list-group mb-4">
+            <li class="list-group-item"><strong class="text-primary">Regulator:</strong> {{ regulation.regulator.name }}</li>
+            <li class="list-group-item"><strong class="text-primary">Industry Sector:</strong> {{ regulation.industry_sector.name }}</li>
+            <li class="list-group-item"><strong class="text-primary">Regulation Type:</strong> {{ regulation.regulation_type.name }}</li>
+            <li class="list-group-item"><strong class="text-primary">Technology:</strong> {{ regulation.technology.name }}</li>
+            <li class="list-group-item"><strong class="text-primary">Regulatory Details:</strong> {{ regulation.regulatorydetails }}</li>
         </ul>
         <a href="{% url 'regulation_list' %}" class="btn btn-secondary mt-3">Back to Regulations</a>
         <a href="{% url 'regulation_detail_pdf' regulation.pk %}" class="btn btn-primary mt-3">Download as PDF</a>

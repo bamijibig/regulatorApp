@@ -7,15 +7,14 @@
     <div class="col-md-12">
         <h1 class="my-4">Regulations</h1>
         <form method="get" action="{% url 'regulation_list' %}" class="form-inline mb-4">
-            <input type="text" name="q" class="form-control mr-2" placeholder="Search regulations...">
+            <input type="text" name="q" class="form-control mr-2" placeholder="Search regulations..." style="flex-grow: 1;">
             <button type="submit" class="btn btn-primary">Search</button>
         </form>
-       
         <div class="list-group">
             {% for regulation in regulations %}
-                <a href="{% url 'regulation_detail' regulation.pk %}" class="list-group-item list-group-item-action">
-                    <h5 class="mb-1">{{ regulation.title }}</h5>
-                    <p class="mb-1">{{ regulation.description|truncatewords:20 }}</p>
+                <a href="{% url 'regulation_detail' regulation.pk %}" class="list-group-item list-group-item-action mb-2 shadow-sm" style="border: 1px solid #007bff;">
+                    <h5 class="mb-1 text-primary">{{ regulation.title }}</h5>
+                    <p class="mb-1 text-secondary">{{ regulation.description|truncatewords:20 }}</p>
                 </a>
             {% endfor %}
         </div>
