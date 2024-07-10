@@ -1,12 +1,8 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.core.paginator import Paginator
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
-from .models import Regulation
-
-# Create your views here.
-from django.shortcuts import render, get_object_or_404
 from .models import Regulation
 
 def regulation_list(request):
@@ -15,7 +11,12 @@ def regulation_list(request):
         regulations = Regulation.objects.filter(title__icontains=query)
     else:
         regulations = Regulation.objects.all()
-    return render(request, 'regulations/regulation_list.html', {'regulations': regulations})
+    
+    paginator = Paginator(regulations, 3)  # Show 10 regulations per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    return render(request, 'regulations/regulation_list.html', {'page_obj': page_obj, 'query': query})
 
 def regulation_detail(request, pk):
     regulation = get_object_or_404(Regulation, pk=pk)
