@@ -12,7 +12,19 @@
             <li class="list-group-item"><strong class="text-primary">Industry Sector:</strong> {{ regulation.industry_sector.name }}</li>
             <li class="list-group-item"><strong class="text-primary">Regulation Type:</strong> {{ regulation.regulation_type.name }}</li>
             <li class="list-group-item"><strong class="text-primary">Technology:</strong> {{ regulation.technology.name }}</li>
+            <li class="list-group-item"><strong class="text-primary">Official Email:</strong>{{ regulation.email }}</li>
+                        {% if regulation.url %}
+            <li class="list-group-item">
+                <strong class="text-primary">Official Website:</strong> 
+                <a href="{{ regulation.url }}">{{ regulation.url }}</a>
+            </li>
+            {% else %}
+            <li class="list-group-item">
+                <strong class="text-primary">Official Website:</strong> None
+            </li>
+            {% endif %}
             <li class="list-group-item"><strong class="text-primary">Regulatory Details:</strong> {{ regulation.regulatorydetails }}</li>
+            
         </ul>
         <a href="{% url 'regulation_list' %}" class="btn btn-secondary mt-3">Back to Regulations</a>
         <a href="{% url 'regulation_detail_pdf' regulation.pk %}" class="btn btn-primary mt-3">Download as PDF</a>

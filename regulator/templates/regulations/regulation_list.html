@@ -7,14 +7,76 @@
     <div class="col-md-12">
         <h1 class="my-4">Regulations</h1>
         <form method="get" action="{% url 'regulation_list' %}" class="form-inline mb-4">
-            <input type="text" name="q" class="form-control mr-2" placeholder="Search regulations..." style="flex-grow: 1;">
+            <input type="text" name="q" class="form-control mr-2" placeholder="Search regulations..." style="flex-grow: 1;" value="{{ query }}">
             <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+        <form method="get" action="{% url 'regulation_list' %}" class="mb-4">
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="regulation_type">Regulation Type</label>
+                    <select id="regulation_type" name="regulation_type" class="form-control">
+                        <option value="">-- Select Regulation Type --</option>
+                        {% for type in regulation_types %}
+                            <option value="{{ type.id }}" {% if type.id|stringformat:"s" == request.GET.regulation_type %}selected{% endif %}>{{ type.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="jurisdiction">Jurisdiction</label>
+                    <select id="jurisdiction" name="jurisdiction" class="form-control">
+                        <option value="">-- Select Jurisdiction --</option>
+                        {% for jurisdiction in jurisdictions %}
+                            <option value="{{ jurisdiction }}" {% if jurisdiction == request.GET.jurisdiction %}selected{% endif %}>{{ jurisdiction }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="industry_sector">Industry Sector</label>
+                    <select id="industry_sector" name="industry_sector" class="form-control">
+                        <option value="">-- Select Industry Sector --</option>
+                        {% for sector in industry_sectors %}
+                            <option value="{{ sector.id }}" {% if sector.id|stringformat:"s" == request.GET.industry_sector %}selected{% endif %}>{{ sector.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="regulator">Regulator</label>
+                    <select id="regulator" name="regulator" class="form-control">
+                        <option value="">-- Select Regulator --</option>
+                        {% for regulator in regulators %}
+                            <option value="{{ regulator.id }}" {% if regulator.id|stringformat:"s" == request.GET.regulator %}selected{% endif %}>{{ regulator.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Filter</button>
         </form>
         <div class="list-group">
             {% for regulation in page_obj %}
-                <a href="{% url 'regulation_detail' regulation.pk %}" class="list-group-item list-group-item-action mb-2 shadow-sm" style="border: 1px solid #007bff;">
+                <a href="{% url 'regulation_detail' regulation.pk %}" class="list-group-item mb-2 shadow-sm" style="border: 1px solid #007bff; text-decoration: none; color: inherit;">
                     <h5 class="mb-1 text-primary">{{ regulation.title }}</h5>
-                    <p class="mb-1 text-secondary">{{ regulation.description|truncatewords:20 }}</p>
+                    <p class="mb-1 text-secondary">{{ regulation.regulatorydetails|truncatewords:20 }}</p>
+                    <div class="mt-3">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p><strong>Regulation Type:</strong> {{ regulation.regulation_type.name }}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><strong>Jurisdiction:</strong> {% if regulation.regulators.all %}{{ regulation.regulators.first.jurisdiction }}{% else %}N/A{% endif %}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><strong>Industry Sector:</strong> {{ regulation.industry_sector.name }}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <p><strong>Regulator:</strong> {% if regulation.regulators.all %}{{ regulation.regulators.first.name }}{% else %}N/A{% endif %}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- {% if regulation.url %}
+                        
+                            <a href="{{ regulation.url }}" class="btn btn-link" target="_blank">Visit {{ regulation.url }} to read more</a>
+                            
+                    {% endif %} -->
                 </a>
             {% endfor %}
         </div>
