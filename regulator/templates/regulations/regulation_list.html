@@ -62,13 +62,29 @@
                                 <p><strong>Regulation Type:</strong> {{ regulation.regulation_type.name }}</p>
                             </div>
                             <div class="col-md-3">
-                                <p><strong>Jurisdiction:</strong> {% if regulation.regulators.all %}{{ regulation.regulators.first.jurisdiction }}{% else %}N/A{% endif %}</p>
+                                <p><strong>Jurisdictions:</strong> 
+                                    {% if regulation.regulators.all %}
+                                        {% for regulator in regulation.regulators.all %}
+                                            {{ regulator.jurisdiction }}{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </p>
                             </div>
                             <div class="col-md-3">
                                 <p><strong>Industry Sector:</strong> {{ regulation.industry_sector.name }}</p>
                             </div>
                             <div class="col-md-3">
-                                <p><strong>Regulator:</strong> {% if regulation.regulators.all %}{{ regulation.regulators.first.name }}{% else %}N/A{% endif %}</p>
+                                <p><strong>Regulators:</strong> 
+                                    {% if regulation.regulators.all %}
+                                        {% for regulator in regulation.regulators.all %}
+                                            {{ regulator.name }}{% if not forloop.last %}, {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </p>
                             </div>
                         </div>
                     </div>

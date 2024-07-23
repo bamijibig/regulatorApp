@@ -1,9 +1,9 @@
 from django.contrib import admin
 from .models import Regulator, IndustrySector, RegulationType, Technology, Regulation
 
-admin.site.site_header = "Chin Project Administration"
-admin.site.site_title = "Chin Project Admin Portal"
-admin.site.index_title = "Welcome to Chin Project Administration"
+admin.site.site_header = "RegAccess Project Administration"
+admin.site.site_title = "RegAccess Project Admin Portal"
+admin.site.index_title = "Welcome to RegAccess Project Administration"
 
 class RegulatorAdmin(admin.ModelAdmin):
     list_display = ('name', 'jurisdiction', 'address','phone_no', 'regulatory_scope', 'legal_documents')

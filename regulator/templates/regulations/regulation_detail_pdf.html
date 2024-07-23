@@ -3,17 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ regulation.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        h1 {
+            color: #007bff;
+            margin: 20px;
+            text-align: center;
+        }
+
+        p {
+            margin: 20px;
+            color: #666;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        strong {
+            color: #333;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <h1>{{ regulation.title }}</h1>
     <p>{{ regulation.description }}</p>
     <ul>
-        <li><strong>Regulator:</strong> {{ regulation.regulator.name }}</li>
-        <li><strong>Industry Sector:</strong> {{ regulation.industry_sector.name }}</li>
-        <li><strong>Regulation Type:</strong> {{ regulation.regulation_type.name }}</li>
-        <li><strong>Technology:</strong> {{ regulation.technology.name }}</li>
-        <li><strong>Regulation Details:</strong> {{ regulation.regulatorydetails }}</li>
-        <li class="list-group-item"><strong class="text-primary">Read more on their Official website:</strong> <a href="{{ regulation.url }}">{{ regulation.url }} </a></li>
+        <li>
+            <strong>Regulators:</strong> 
+            {% if regulation.regulators.all %}
+                {% for regulator in regulation.regulators.all %}
+                    {{ regulator.name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                N/A
+            {% endif %}
+        </li>
+        <li>
+            <strong>Jurisdictions:</strong> 
+            {% if regulation.regulators.all %}
+                {% for regulator in regulation.regulators.all %}
+                    {{ regulator.jurisdiction }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            {% else %}
+                N/A
+            {% endif %}
+        </li>
+        <li>
+            <strong>Industry Sector:</strong> {{ regulation.industry_sector.name }}
+        </li>
+        <li>
+            <strong>Regulation Type:</strong> {{ regulation.regulation_type.name }}
+        </li>
+        <li>
+            <strong>Technology:</strong> {{ regulation.technology.name }}
+        </li>
+       
+        <li class="list-group-item">
+            <strong>Official Email:</strong> 
+            {% if regulation.email %}
+                <a href="{{ regulation.email }}" target="_blank">{{ regulation.email }}</a>
+            {% else %}
+                None
+            {% endif %}
+        </li>
+        <li class="list-group-item">
+            <strong>Official website:</strong> 
+            {% if regulation.url %}
+                <a href="{{ regulation.url }}" target="_blank">{{ regulation.url }}</a>
+            {% else %}
+                None
+            {% endif %}
+        </li>
+        <li>
+            <strong>Regulation Details:</strong> {{ regulation.regulatorydetails }}
+        </li>
     </ul>
 </body>
 </html>
