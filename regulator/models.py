@@ -1,13 +1,14 @@
 from django.db import models
+from tinymce.models import HTMLField
 
 class Regulator(models.Model):
     JURISDICTION_CHOICES = (
         ('National', 'National'),
         ('Scotland', 'Scotland'),
         ('England', 'England'),
-      
+
     )
-    
+
     name = models.CharField(max_length=255)
     jurisdiction = models.CharField(
         max_length=50,
@@ -43,12 +44,12 @@ class Technology(models.Model):
 
 class Regulation(models.Model):
     title = models.CharField(max_length=255)
-    description = models.TextField()
+    description = HTMLField()
     regulators = models.ManyToManyField(Regulator, related_name='regulations')
     industry_sector = models.ForeignKey(IndustrySector, on_delete=models.CASCADE)
     regulation_type = models.ForeignKey(RegulationType, on_delete=models.CASCADE)
     technology = models.ForeignKey(Technology, on_delete=models.CASCADE)
-    regulatorydetails = models.TextField()
+    regulatorydetails = HTMLField()
     url = models.URLField(max_length=200, blank=True, null=True)
     email=models.EmailField(blank=True, null=True)
 

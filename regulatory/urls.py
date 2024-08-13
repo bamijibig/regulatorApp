@@ -21,7 +21,9 @@ from regulator import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('', views.regulation_list, name='regulation_list'),
+    path('', views.regulation_list, name='regulation_list'),
     path('<int:pk>/', views.regulation_detail, name='regulation_detail'),
     path('regulation/<int:pk>/pdf/', views.regulation_detail_pdf, name='regulation_detail_pdf'),
+    path('regulators/', views.regulator_list, name='regulator_list'),
+    path('regulators/<int:pk>/', views.regulator_detail, name='regulator_detail'),
 ]

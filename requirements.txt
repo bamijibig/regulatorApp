@@ -10,6 +10,9 @@ colorama==0.4.6
 cryptography==42.0.8
 cssselect2==0.7.0
 Django==5.0.6
+django-ckeditor-5==0.2.13
+django-js-asset==2.2.0
+django-tinymce==4.1.0
 html5lib==1.1
 idna==3.7
 lxml==5.2.2
@@ -35,4 +38,5 @@ tzlocal==5.2
 uritools==4.0.3
 urllib3==2.2.2
 webencodings==0.5.1
+whitenoise==6.7.0
 xhtml2pdf==0.2.16
